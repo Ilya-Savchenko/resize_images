@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from .forms import FormImage
+from .models import ModelImage
+
+
+class ImagesView(generic.ListView, generic.FormView):
+    form_class = FormImage
+    model = ModelImage
+    template_name = 'resize_image/index.html'

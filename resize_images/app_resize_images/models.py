@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+
+class ModelImage(models.Model):
+    image = models.ImageField(verbose_name='Изображение')

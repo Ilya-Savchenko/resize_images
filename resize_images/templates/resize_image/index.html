@@ -5,6 +5,10 @@
     <title>Загрузка изображений</title>
 </head>
 <body>
-
+<h1>Загрузка изображений</h1>
+<form>
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
 </body>
 </html>
