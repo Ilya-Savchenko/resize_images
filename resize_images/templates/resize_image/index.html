@@ -6,9 +6,18 @@
 </head>
 <body>
 <h1>Загрузка изображений</h1>
-<form>
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <button type="submit">Загрузить</button>
 </form>
+<hr>
+{% if images %}
+    {% for img in images %}
+        <p><img src="{{ MEDIA_URL }}{{ img.image.url }}" width="300">{{ img }}</p>
+    {% endfor %}
+{% else %}
+    <h2>Изображений нет</h2>
+{% endif %}
 </body>
 </html>
