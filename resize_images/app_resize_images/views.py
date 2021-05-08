@@ -2,7 +2,7 @@ import datetime
 import os.path
 
 import requests
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from .forms import FormImage
@@ -22,19 +22,18 @@ class ImagesView(generic.ListView, generic.FormView):
         link = form.cleaned_data.get('link')
         image = self.request.FILES.get('image')
         if link and image:
-            self.form_invalid(form)
+            reverse('index')
         if link:
             self._download_image_and_saved_in_db(link)
-            return super().form_valid(form)
         elif image:
             print(image)
             self.model.objects.create(
                 name=image.name,
                 image=image
             )
-            return super().form_valid(form)
         else:
-            self.form_invalid(form)
+            reverse('index')
+        return super().form_valid(form)
 
     def _download_image_and_saved_in_db(self, link):
         p = requests.get(link)
